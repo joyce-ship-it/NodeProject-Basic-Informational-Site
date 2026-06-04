@@ -13,3 +13,5 @@ The request object's url is used to find what webpage the user wants to see. Bas
 The fs module is then used to read the files from the path and then write them to the response object. The data is sent only after res.end() is executed.
 
 ![screenshot of UI](image.png)
+
+rewrite this with Express
