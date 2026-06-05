@@ -49,15 +49,22 @@
 // });
 
 const express = require("express");
+const path = require("path");
 const app = express();
 
 const PORT = 3000;
-const path = "D:/Node Backend/basic informational site/pages";
-console.log(path);
-app.get("/", (req, res) => res.sendFile(`${path}${req.url}index.html`));
-app.get("/about", (req, res) => res.sendFile(`${path}${req.url}.html`));
-app.get("/contact-me", (req, res) => res.sendFile(`${path}${req.url}.html`));
-app.get("/404", (req, res) => res.sendFile(`${path}${req.url}.html`));
+// const path = "D:/Node Backend/basic informational site/pages";
+// console.log(path);
+app.get("/", (req, res) =>
+  res.sendFile(path.join(__dirname, "pages", "index.html")),
+);
+app.get("/about", (req, res) =>
+  res.sendFile(path.join(__dirname, "pages", "about.html")),
+);
+app.get("/contact", (req, res) =>
+  res.sendFile(path.join(__dirname, "pages", "contact-me.html")),
+);
+// app.get("/404", (req, res) => res.sendFile(`${path}${req.url}.html`));
 
 app.listen(PORT, (error) => {
   if (error) {
