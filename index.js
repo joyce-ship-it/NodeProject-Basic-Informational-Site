@@ -55,14 +55,19 @@ const app = express();
 const PORT = 3000;
 // const path = "D:/Node Backend/basic informational site/pages";
 // console.log(path);
-app.get("/", (req, res) =>
-  res.sendFile(path.join(__dirname, "pages", "index.html")),
-);
-app.get("/about", (req, res) =>
-  res.sendFile(path.join(__dirname, "pages", "about.html")),
-);
+
+const options = {
+  root: path.join(__dirname, "pages"),
+};
+function printErr(err) {
+  if (err) {
+    throw err;
+  }
+}
+app.get("/", (req, res) => res.sendFile("index.html", options, printErr));
+app.get("/about", (req, res) => res.sendFile("about.html", options, printErr));
 app.get("/contact", (req, res) =>
-  res.sendFile(path.join(__dirname, "pages", "contact-me.html")),
+  res.sendFile("contact-me.html", options, printErr),
 );
 // app.get("/404", (req, res) => res.sendFile(`${path}${req.url}.html`));
 
