@@ -61,15 +61,32 @@ const options = {
 };
 function printErr(err) {
   if (err) {
-    throw err;
+    console.log(err);
+  } else {
+    console.log("file has been sent");
   }
 }
-app.get("/", (req, res) => res.sendFile("index.html", options, printErr));
-app.get("/about", (req, res) => res.sendFile("about.html", options, printErr));
-app.get("/contact", (req, res) =>
-  res.sendFile("contact-me.html", options, printErr),
+app.get("/", (req, res) =>
+  res.sendFile("index.html", options, (err) => {
+    printErr(err);
+  }),
 );
-// app.get("/404", (req, res) => res.sendFile(`${path}${req.url}.html`));
+app.get("/about", (req, res) =>
+  res.sendFile("about.html", options, (err) => {
+    printErr(err);
+  }),
+);
+app.get("/contact", (req, res) =>
+  res.sendFile("contact-me.html", options, (err) => {
+    printErr(err);
+  }),
+);
+
+app.get("/404", (req, res) =>
+  res.sendFile("/404.html", options, (next) => {
+    printErr(next);
+  }),
+);
 
 app.listen(PORT, (error) => {
   if (error) {
